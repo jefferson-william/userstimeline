@@ -1,0 +1,33 @@
+{
+  "name": "app",
+  "private": true,
+  "dependencies": {
+    "angular": "1.5.11",
+    "angular-animate": "1.5.11",
+    "angular-aria": "1.5.11",
+    "angular-cookies": "1.5.11",
+    "angular-i18n": "1.5.11",
+    "angular-messages": "1.5.11",
+    "angular-resource": "1.5.11",
+    "angular-sanitize": "1.5.11",
+    "angular-material": "1.1.1",
+    "angularAMD": "https://github.com/jefferson-william/angularAMD.git#0.2.3",
+    "requirejs": "https://github.com/jefferson-william/requirejs.git#2.3.4",
+    "require-css": "0.1.8",
+    "requirejs-plugins": "https://github.com/jefferson-william/requirejs-plugins.git#1.0.4",
+    "moment": "https://github.com/jefferson-william/moment.git#2.17.3",
+    "roboto-fontface": "0.4.5"
+  },
+  "devDependencies": {
+    "DefinitelyTyped": "https://github.com/jefferson-william/DefinitelyTyped.git#1.4.1",
+    "angular-material-sass-files": "1.0.5",
+    "google-material-color": "1.2.6"
+  },
+  "resolutions": {
+    "angular": "1.5.11",
+    "angular-ui-router": "0.3.0",
+    "angular-material": "1.1.1",
+    "requirejs": "2.3.4",
+    "moment": "2.17.2"
+  }
+}

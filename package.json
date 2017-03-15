@@ -1,0 +1,35 @@
+{
+  "name": "leblot",
+  "version": "0.0.0",
+  "scripts": {
+    "debug-mocha": "iron-node node_modules/mocha/bin/_mocha",
+    "debug-grunt": "iron-node node_modules/grunt-cli/bin/grunt build",
+    "debug-gulp": "iron-node node_modules/gulp/bin/gulp.js"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.12.8",
+    "gulp": "3.9.1",
+    "gulp-autoprefixer": "2.3.1",
+    "gulp-awspublish": "^3.3.0",
+    "gulp-cssnano": "2.1.1",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-if": "2.0.0",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-jsbeautifier": "^2.0.4",
+    "gulp-plumber": "1.1.0",
+    "gulp-rename": "1.2.2",
+    "gulp-requirejs-optimize": "^1.2.0",
+    "gulp-sass": "^2.2.0",
+    "gulp-sequence": "^0.4.5",
+    "gulp-size": "2.1.0",
+    "gulp-sourcemaps": "1.6.0",
+    "gulp-typescript": "^3.1.4",
+    "gulp-uglify": "1.5.3",
+    "gulp-util": "3.0.7",
+    "gulp-watch": "^4.3.10",
+    "merge-stream": "1.0.0",
+    "rimraf": "2.5.2",
+    "sw-precache": "^3.2.0",
+    "typescript": "^2.2.0-dev.20170110"
+  }
+}

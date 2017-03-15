@@ -1,0 +1,15 @@
+*.lock
+*.phar
+*.sublime-*
+vendor/*
+vendor/autoload.php
+!vendor/cakephp-plugins.php
+config/app.production.php
+tmp/*
+logs/*
+node_modules/
+webroot/bower_components
+webroot/css
+webroot/js
+webroot/files
+webroot/*.js
