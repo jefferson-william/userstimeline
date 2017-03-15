@@ -16,15 +16,15 @@ define([
 
     Util.AcessandoPaginaComGulp = (): boolean => (location.href.search(/(localhost:)/) > -1 ? true : false);
 
-    Util.RetornarUrlBase = (): string => !Util.AcessandoPaginaComGulp() ? '/leblot/' : '/#/';
+    Util.RetornarUrlBase = (): string => !Util.AcessandoPaginaComGulp() ? `${Lazyload.rootStatic}/` : '/#/';
 
     Util.RetornarUrlBaseApp = (): string => `${Util.RetornarUrlBase()}app/`;
 
-    Util.RetornarUrlServidor = (): string => !Util.AcessandoPaginaComGulp() ? '/leblot/' : 'http://localhost/leblot/';
+    Util.RetornarUrlServidor = (): string => !Util.AcessandoPaginaComGulp() ? `${Lazyload.rootStatic}/` : 'http://localhost/userstimeline/';
 
     Util.RetornarUrlServidorApp = (): string => `${Util.RetornarUrlServidor()}app/`;
 
-    Util.RetornarUrlBaseServidor = (): string => !Util.AcessandoPaginaComGulp() ? '/leblot/' : 'http://localhost:9001/';
+    Util.RetornarUrlBaseServidor = (): string => !Util.AcessandoPaginaComGulp() ? `${Lazyload.rootStatic}/` : 'http://localhost:9001/';
 
     Util.RetornarUrlBaseServidorApp = (): string => `${Util.RetornarUrlBaseServidor()}app/`;
 

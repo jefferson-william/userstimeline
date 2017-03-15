@@ -61,7 +61,7 @@ define([
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
         // Redirecionar para a url inicial caso a url informada não tenha sido configurada/não exista
-        $urlRouterProvider.otherwise(Util.AcessandoPaginaComGulp ? '/app/' : '/userstimeline/app/');
+        $urlRouterProvider.otherwise(Util.AcessandoPaginaComGulp() ? '/app/' : `${Lazyload.rootStatic}/app/`);
 
         Route.SetarTodas();
 

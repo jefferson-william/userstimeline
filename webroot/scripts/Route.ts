@@ -10,7 +10,7 @@ define([
 
     Route = {
         'LayoutApp': {
-            url: Lazyload.rootStatic ? '/userstimeline/app/' : '/app/',
+            url: Lazyload.rootStatic ? `${Lazyload.rootStatic}/app/` : '/app/',
             dependencies: ['LayoutController'],
             views: {
                 '': {
