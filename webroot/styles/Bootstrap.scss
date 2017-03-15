@@ -17,8 +17,6 @@ html {
 	font-size: $font-size;
 }
 body {
-	background: #f2f2f2;
-	color: #212121;
     md-input-container {
         display: block;
         width: 100%;
@@ -51,19 +49,19 @@ body {
     z-index: $z-index-toast;
     md-whiteframe {
         height: 60px;
-        background: palette(Red);
+        background: palette(Indigo);
     }
     h2 {
         margin-left: 20px;
         font-size: 20px;
-        color: palette(Red, 900);
+        color: palette(Indigo, 900);
     }
     md-menu-bar a {
         height: 20px;
         padding: 20px 0;
         font-size: 16px;
         text-decoration: none;
-        color: palette(Red, 100);
+        color: palette(Indigo, 100);
         &:hover {
             color: #fff;
         }
@@ -81,12 +79,19 @@ body {
 }
 body,
 md-content.content-main {
-    background-color: #f2f2f2;
+    background-color: rgb(250,250,250);
 }
 h1,
 h2,
 h3 {
     md-icon {
-        margin-top: -5px
+        margin-top: -5px;
+    }
+}
+md-fab-speed-dial {
+    &.fixed {
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
     }
 }
