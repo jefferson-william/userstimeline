@@ -36,7 +36,7 @@ class AppController extends Controller
     {
         $this->ec2 = strpos(ROOT, 'var') !== false;
         $this->local = strpos(ROOT, 'wamp64') !== false;
-        $this->rootStatic = $this->ec2 ? 'http://userstimeline.s3-website-sa-east-1.amazonaws.com' : '/userstimeline';
+        $this->rootStatic = $this->ec2 ? 'https://s3-sa-east-1.amazonaws.com/userstimeline' : '/userstimeline';
         $this->extensionStaticFiles = $this->ec2 ? '.gz' : '';
 
         $this->set('extensionStaticFiles', $this->extensionStaticFiles);
