@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api;
 
-use App\Controller\AppController;
+use App\Controller\Api\ApiController;
 
-class UsersController extends AppController
+class UsersController extends ApiController
 {
     public $paginate = [
-        'contain' => [],
+        'contain' => ['UserUpdates'],
         'order' => [
             'Users.created' => 'desc',
         ]
@@ -95,5 +95,7 @@ class UsersController extends AppController
             $this->set('_serialize', ['errors']);
             return;
         }
+        $this->set(compact('data'));
+        $this->set('_serialize', ['data']);
     }
 }

@@ -21,6 +21,7 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync').create(),
     requirejsOptimize = require('gulp-requirejs-optimize'),
     awspublish = require('gulp-awspublish'),
+    htmlmin = require('gulp-htmlmin'),
     prettify = require('gulp-jsbeautifier');
 
 var extAll = '{js,html,css,png,jpg,gif}';
@@ -442,10 +443,10 @@ gulp.task('awspublishcomplete', function () {
     var publisher = awspublish.create({
         region: 'us-west-2',
         params: {
-            Bucket: 'leblot'
+            Bucket: 'userstimeline'
         },
-        accessKeyId: 'AKIAIPRNVN24XSGG5RTQ',
-        secretAccessKey: '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',
+        accessKeyId: 'AKIAJ56QH4JHJKQURRWQ',
+        secretAccessKey: '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',
         signatureVersion: 'v3'
     }, {
         cacheFileName: 'awspublish.json'
@@ -465,23 +466,23 @@ gulp.task('awspublish', function () {
     var publisher = awspublish.create({
         region: 'us-west-2',
         params: {
-            Bucket: 'leblot'
+            Bucket: 'userstimeline'
         },
-        accessKeyId: 'AKIAIPRNVN24XSGG5RTQ',
-        secretAccessKey: '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',
+        accessKeyId: 'AKIAJ56QH4JHJKQURRWQ',
+        secretAccessKey: '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',
         signatureVersion: 'v3'
     }, {
         cacheFileName: 'awspublish.json'
     });
     var files = [
-        paths.webroot + '**/*.{css,js,html,woff,woff2,eot,ttf}',
-        '!' + paths.bower + '**',
+        paths.webroot + '{css,js,lib,partials}/*.{css,js,html,woff,woff2,eot,ttf}',
+        paths.webroot + '*.{css,js,html,woff,woff2,eot,ttf}',
     ];
     return gulp.src(files)
         .pipe(gulpif('**/*.html', htmlmin({ collapseWhitespace: true })))
         .pipe(gulpif('**/*.js', uglify()))
-        .pipe(gulpif('**/*.css', cssnano()))
         .pipe(gulpif('**/*.css', autoprefixer({ browsers: ['> 1%', 'last 2 versions', 'IE 8'] })))
+        .pipe(gulpif('**/*.css', cssnano()))
         .pipe(gulpif('!**/*.{html,woff,woff2,eot,ttf}', awspublish.gzip({ ext: '.gz' })))
         .pipe(publisher.publish({ 'Cache-Control': 'max-age=315360000, no-transform, public' }))
         .pipe(publisher.cache())
@@ -512,6 +513,6 @@ gulp.task('builder', sequence('construct', 'watch'));
 
 gulp.task('production', sequence('construct'));
 
-gulp.task('publish', sequence('construct', 'awspublish', 'awspublishFormat'));
+gulp.task('publish', sequence('construct', 'requirejsOptimize', 'sw', 'awspublish', 'awspublishFormat'));
 
-gulp.task('deploy', sequence('construct', 'awspublishcomplete', 'awspublishFormat'));
+gulp.task('deploy', sequence('construct', 'requirejsOptimize', 'sw', 'awspublishcomplete', 'awspublishFormat'));

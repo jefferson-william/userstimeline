@@ -61,13 +61,13 @@ define([
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
         // Redirecionar para a url inicial caso a url informada não tenha sido configurada/não exista
-        $urlRouterProvider.otherwise(Util.AcessandoPaginaComGulp() ? '/app/' : `${Lazyload.rootStatic}/app/`);
+        $urlRouterProvider.otherwise(Util.AcessandoPaginaComGulp() ? '/app/users' : `${Lazyload.rootStatic}/app/users`);
 
         Route.SetarTodas();
 
         $locationProvider.html5Mode(Lazyload.rootStatic ? true : false);
 
-        $mdThemingProvider.theme('default').primaryPalette('indigo').accentPalette('deep-orange');
+        $mdThemingProvider.theme('default').primaryPalette('teal').accentPalette('deep-purple');
     };
     Configuration.$inject = ['$sceDelegateProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', '$controllerProvider', '$provide', '$filterProvider', '$compileProvider', '$httpProvider', '$mdThemingProvider', '$mdIconProvider'];
 

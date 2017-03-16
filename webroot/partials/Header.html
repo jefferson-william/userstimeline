@@ -2,7 +2,12 @@
     <h2 ui-sref=".">
         Users Timeline
     </h2>
-    <md-menu-bar flex>
+    <md-menu-bar flex layout="row">
+        <md-menu>
+		    <a ui-sref="LayoutApp.UsersIndex" ng-click>Usuários</a>
+            <md-menu-content></md-menu-content>
+        </md-menu>
+        <div flex></div>
         <md-menu>
 		    <a href="https://github.com/jefferson-william/userstimeline" target="_blank" ng-click>Github</a>
             <md-menu-content></md-menu-content>

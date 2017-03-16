@@ -14,14 +14,18 @@ define([
         public results;
         public editing: boolean;
         public openingDialog: boolean;
-        public Users;
+        public query: {};
         public isClient: boolean;
+        public Users: IUsersModel[];
+        public User: IUsersModel;
 
         constructor (private $scope: IUsersIndexScope,
             private $mdToast: ng.material.IToastService,
             private $mdDialog: ng.material.IDialogService,
             private ngLazyload: ILazyload,
-            private UsersService: IUsersService) {
+            private UsersService) {
+
+            this.GetUsers(true);
         }
 
         public Add = ($event?: any | boolean) => {
@@ -49,54 +53,69 @@ define([
             });
         }
 
-        public GetUser = (forceReload?: boolean) => {
+        public GetUsers = (forceReload?: boolean) => {
             if (forceReload !== true && this.promise && !this.promise.$$state.status) return;
 
-            this.promise = this.UsersService.query(this.query, this.UsersObtained).$promise;
+            this.promise = this.UsersService.query(this.query, this.UsersObtained, this.UsersNotObtained).$promise;
         }
 
         public Edit = (user: IUsersModel, $event: any) => {
             if (this.promise && !this.promise.$$state.status) return;
 
             this.editing = true;
-            this.Users = this.UsersService.get({ id: user.id }, this.UserObtained, this.UsersNotRemoved);
-            this.promise = this.Users.$promise;
+            this.promise = this.UsersService.get({ id: user.id }, this.UserObtained, this.UsersNotRemoved).$promise;
         }
 
-        public Delete = ($event: any) => {
+        public Delete = (user: IUsersModel, $event: any) => {
             var confirm = this.$mdDialog.confirm()
-                .title('Excluir endereço')
-                .content('Tem certeza que deseja excluir o endereço?')
-                .ariaLabel('Excluir endereço')
+                .title('Excluir usuário')
+                .content('Tem certeza que deseja excluir o usuário e seu histórico?')
+                .ariaLabel('Excluir usuário')
                 .ok('Quero excluir')
                 .cancel('Não exclua');
 
             this.$mdDialog.show(confirm).then(() => {
-                var ids = this.selected.map((item) => item.id);
-
-                this.promise = this.UsersService.delete({ id: ids[0] }, this.UsersRemoved, this.UsersNotRemoved).$promise;
+                this.promise = this.UsersService.delete({ id: user.id }, this.UsersRemoved, this.UsersNotRemoved).$promise;
             });
         }
 
         public UserObtained = (...args) => {
+            this.User = args[0].data;
+
             this.Add(false);
         }
 
+        public UsersNotObtained = (...args) => {
+            this.$mdToast.show(this.$mdToast.simple().content('Houve um problema ao listar os usuários.'));
+        }
+
+        public TreatUsers = (users: IUsersModel[]) => {
+            for (let i = 0, l = users.length; i < l; i++) {
+                let user: IUsersModel = users[i];
+
+                if (!user.user_updates.length) {
+                }
+            }
+        }
+
+        private UsersObtained = (...args) => {
+            let users: IUsersModel[] = args[0].data;
+
+            this.TreatUsers(users);
+
+            this.Users = users;
+        }
+
         private UsersRemoved = (...args) => {
-            console.log('Excluído.', args);
-
-            this.selected = [];
-
-            this.GetUser(true);
-
             this.$mdToast.show(this.$mdToast.simple().content('Excluído.'));
+
+            this.GetUsers(true);
         }
 
         private UsersNotRemoved = (...args) => {
-            console.log('Não excluído.', args);
-
             this.$mdToast.show(this.$mdToast.simple().content('Ops!'));
         }
+    }
 
     app.controller('UsersIndexController', UsersIndexController);
 

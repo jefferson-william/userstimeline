@@ -13,4 +13,5 @@ interface IUtil {
     IframeStateFactory($q: angular.IQService, futureState: any): angular.IPromise<any>;
     NgLoadStateFactory($q: angular.IQService, futureState: any): angular.IPromise<any>;
     LoadAndRegisterFutureStates(): void;
+    FactoryDealErrors(arguments: any[], controller: any, controllerName: string, fieldName?: string): any;
 }

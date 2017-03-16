@@ -1,0 +1,48 @@
+@import 'Variables';
+@import '../bower_components/angular-material-sass-files/_mixins.scss';
+@import '../bower_components/angular-material-sass-files/components/_icon.scss';
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url('#{$materialicons-font-path}-Regular.eot'); /* For IE6-8 */
+    src: url('/leblot#{$materialicons-font-path}-Regular.eot'); /* For IE6-8 */
+    src: local('Material Icons'),
+        local('#{$materialicons-font-path}-Regular'),
+        local('/leblot#{$materialicons-font-path}-Regular'),
+        url('#{$materialicons-font-path}-Regular.woff2') format('woff2'),
+        url('#{$materialicons-font-path}-Regular.woff') format('woff'),
+        url('#{$materialicons-font-path}-Regular.ttf') format('truetype'),
+        url('/leblot#{$materialicons-font-path}-Regular.woff2') format('woff2'),
+        url('/leblot#{$materialicons-font-path}-Regular.woff') format('woff'),
+        url('/leblot#{$materialicons-font-path}-Regular.ttf') format('truetype');
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+.md-button,
+.material-icons {
+    &[disabled='disabled'] {
+        opacity: 0.5;
+    }
+}

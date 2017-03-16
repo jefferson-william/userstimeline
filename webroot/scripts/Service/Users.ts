@@ -37,7 +37,7 @@ define([
                 },
             };
 
-            return this.$resource(`${ngLazyload.urlApi}/:api/users/:action:type/:id/`, {}, actions);
+            return this.$resource(`${ngLazyload.urlApi}/api/users/:action:type/:id/`, {}, actions);
         }
     }
 

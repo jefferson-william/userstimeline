@@ -68,5 +68,37 @@ define([
         return ngloadDeferred.promise;
     };
 
+    Util.FactoryDealErrors = (args: any[], controller: any, controllerName: string, fieldName?: string): any => {
+        if (!args || !args[0]) return;
+
+        let form = controller.$scope[`${controllerName}Form`];
+        let errors = args[0].errors || (args[0].data && args[0].data.errors) || null;
+
+        if (!errors || form == undefined) return;
+
+        for (let propModel in controller[controllerName]) {
+            let objectModel = form[propModel];
+            objectModel = objectModel || {};
+        }
+
+        for (let propField in errors) {
+            let name = (fieldName && fieldName + '[' + propField + ']') || propField;
+            let field = form[name] || {};
+            if (typeof errors[propField] == "object" && errors[propField].length) {
+                for (let i = 0, l = errors[propField].length; i < l; i++) {
+                    let nameField: string = propField + '[' + i + ']';
+                    Util.FactoryDealErrors([{ errors: errors[propField][i] }], controller, controllerName, nameField);
+                }
+            } else {
+                for (let propError in errors[propField]) {
+                    field.$invalid = true;
+                    field.$error = field.$error || {};
+                    field.$error[propError] = errors[propField][propError];
+                    form[name] = field;
+                }
+            }
+        }
+    };
+
     return Util;
 });

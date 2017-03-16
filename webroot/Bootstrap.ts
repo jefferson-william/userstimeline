@@ -5,6 +5,7 @@
 
 const rootStatic = document.getElementById('Body').getAttribute('data-root-static') || '';
 const ec2 = document.getElementById('Body').getAttribute('data-ec2') || false;
+const gz = ec2 ? '.gz' : '';
 
 let config = {
     paths: {
@@ -24,6 +25,9 @@ let config = {
         angularPortuguese: 'bower_components/angular-i18n/angular-locale_pt-br',
         angularUiRouter: 'bower_components/angular-ui-router/release/angular-ui-router',
         angularAMD: 'bower_components/angularAMD/dist/angularAMD',
+        angularTimeline: 'bower_components/angular-timeline/dist/angular-timeline',
+        angularTimelineCss: 'bower_components/angular-timeline/dist/angular-timeline',
+        libAngularTimelineCss: 'lib/angular-timeline/angular-timeline',
         BootstrapCss: 'css/Bootstrap',
         Bootstrap: 'Bootstrap',
         Lazyload: 'js/Lazyload',
@@ -52,21 +56,22 @@ require.config({
         angularUiRouter: { deps: ['angularAMD'] },
         angularAMD: { deps: ['angular'] },
         angularMaterial: { deps: ['angularAnimate', 'angularAria'] },
+        angularTimeline: { deps: ['angularAMD'] },
         momentPtBr: { deps: ['moment'] },
         MomentFilter: { deps: ['momentPtBr'] },
         Lazyload: { deps: ['angularAMD'] },
         Route: { deps: ['Lazyload'] },
         Util: { deps: ['Lazyload', 'Route'] },
-        App: { deps: ['Util', 'angularMessages', 'angularResource', 'angularSanitize', 'angularPortuguese', 'angularUiRouter', 'angularMaterial'] },
+        App: { deps: ['Util', 'angularMessages', 'angularResource', 'angularSanitize', 'angularPortuguese', 'angularUiRouter', 'angularMaterial', 'angularTimeline'] },
         LayoutController: { deps: ['HeaderController'] },
         UsersIndexController: { deps: ['UsersService', 'MomentFilter'] },
-        UsersAddController: { deps: ['UsersService', 'ProfilesFactory', 'StateService'] },
+        UsersAddController: { deps: ['UsersService'] },
     }
 });
 
 if (ec2) {
     for (let prop in config.paths) {
-        config.paths[prop] = config.paths[prop] + '.gz';
+        config.paths[prop] = config.paths[prop] + gz;
     }
 }
 
@@ -81,11 +86,11 @@ require(['Lazyload', 'App'], (Lazyload: ILazyload) => {
 
     Lazyload.Set({ rootStatic: rootStatic, ec2: ec2 });
 
-    require(['css!angularMaterialCss'], () => require(['css!BootstrapCss']));
+    require(['css!angularMaterialCss'], () => require(['css!BootstrapCss'], () => require(['css!angularTimelineCss', 'css!libAngularTimelineCss'])));
 });
 
 if (ec2 && 'serviceWorker' in navigator) {
-    (<any>navigator).serviceWorker.register(`${rootStatic}/sw.js'`).then(function() {
+    (<any>navigator).serviceWorker.register(`${rootStatic}/sw.js${gz}`).then(function() {
         console.log("Service Worker Registered.");
     });
 }

@@ -1,7 +1,34 @@
-<md-fab-speed-dial class="fixed">
-    <md-fab-trigger>
-        <md-button accesskey="n" aria-label="menu" class="md-fab md-primary" ng-click="UsersIndex.Add($event)">
-            <md-icon class="material-icons">add</md-icon>
-        </md-button>
-    </md-fab-trigger>
-</md-fab-speed-dial>
+<md-content class="container">
+	<md-fab-speed-dial class="fixed">
+	    <md-fab-trigger>
+	        <md-button accesskey="n" aria-label="menu" class="md-fab md-primary" ng-click="UsersIndex.Add($event)">
+	            <md-icon class="material-icons">add</md-icon>
+	        </md-button>
+	    </md-fab-trigger>
+	</md-fab-speed-dial>
+	<div class="user-content" ng-repeat="user in UsersIndex.Users">
+		<div class="page-header" layout="row">
+	        <div>
+	        	<h1>{{ user.name }}</h1>
+	        	<p><b>Cadastrado:</b> {{ user.created | moment }}</p>
+        	</div>
+	        <div flex></div>
+            <md-icon class="material-icons" ng-click="UsersIndex.Edit(user, $event)">mode_edit</md-icon>
+            <md-icon class="material-icons" ng-click="UsersIndex.Delete(user, $event)">delete</md-icon>
+	    </div>
+	    <ul class="timeline" ng-class="{ hide: !user.user_updates.length }">
+			<li ng-repeat="user_update in user.user_updates" ng-class-odd="'left'" ng-class-even="'right'">
+				<div class="timeline-badge"><i class="glyphicon material-icons view_headline">view_headline</i></div>
+				<div class="timeline-panel">
+					<div class="timeline-heading">
+						<p><small class="text-muted"><i class="glyphicon material-icons access_time">access_time</i> {{ user_update.created | moment }}</small></p>
+					</div>
+					<div class="timeline-body">
+						<p>Alterado o nome de {{ user_update.old_value }} para {{ user_update.new_value }}.</p>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</md-content>
+

@@ -25,6 +25,7 @@ class UsersTable extends Table
         $this->table('users');
         $this->displayField('name');
         $this->primaryKey('id');
+        $this->hasMany('UserUpdates');
     }
 
     public function validationDefault(Validator $validator)

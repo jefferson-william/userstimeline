@@ -1,0 +1,39 @@
+<md-dialog class="app-dialog" aria-label="Modal de adicionar usuários">
+    <md-content>
+        <form name="UsersForm" ng-submit="UsersAdd.Submit($event, UsersForm)" novalidate>
+            <md-toolbar>
+                <div md-whiteframe="1" class="md-toolbar-tools">
+                    <h2>{{UsersAdd.title}} usuário</h2>
+                    <span flex></span>
+                    <md-button class="md-icon-button" ng-click="UsersAdd.DialogClose()">
+                        <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <md-dialog-content>
+                <md-progress-linear md-mode="indeterminate" ng-show="UsersAdd.saving"></md-progress-linear>
+                <div class="md-dialog-content">
+                    <div layout="row">
+                        <md-input-container>
+                            <input name="name" placeholder="Nome" type="text" required ng-model="UsersAdd.User.name" ng-minlength="1" ng-maxlength="255">
+                            <div ng-messages="UsersForm.name.$error" ng-show="UsersForm.name.$touched || UsersForm.name.$dirty" role="alert">
+                                <div ng-message="required">Informe este campo</div>
+                                <div ng-message="minlength">Preencha este campo</div>
+                                <div ng-message="maxlength">Ultrapassou o limite de caracteres</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </div>
+            </md-dialog-content>
+            <md-dialog-actions layout="row">
+                <span flex></span>
+                <md-button ng-click="UsersAdd.DialogClose()">
+                    Cancelar
+                </md-button>
+                <md-button type="submit" class="md-primary" ng-click>
+                    {{UsersAdd.title}}
+                </md-button>
+            </md-dialog-actions>
+        </form>
+    </md-content>
+</md-dialog>

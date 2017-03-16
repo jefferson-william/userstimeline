@@ -17,7 +17,9 @@
     "requirejs-plugins": "https://github.com/jefferson-william/requirejs-plugins.git#1.0.4",
     "moment": "https://github.com/jefferson-william/moment.git#2.17.3",
     "angular-ui-router": "0.3.0",
-    "roboto-fontface": "0.4.5"
+    "roboto-fontface": "0.4.5",
+    "material-design-icons": "3.0.1",
+    "angular-timeline": "^1.7.0"
   },
   "devDependencies": {
     "DefinitelyTyped": "https://github.com/jefferson-william/DefinitelyTyped.git#1.4.1",
