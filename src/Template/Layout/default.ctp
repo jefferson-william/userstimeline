@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Users Timeline</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js"></script>
+    <script src="<?= $rootStatic ?>/bower_components/requirejs/require.js<?= $extensionStaticFiles ?>"></script>
 </head>
 <body id="Body" data-root-static="<?= $rootStatic ?>" data-local="<?= $local ?>" data-ec2="<?= $ec2 ?>" ng-cloak>
     <base href="/">
