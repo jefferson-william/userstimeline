@@ -25,7 +25,9 @@ class UsersTable extends Table
         $this->table('users');
         $this->displayField('name');
         $this->primaryKey('id');
-        $this->hasMany('UserUpdates');
+        $this->hasMany('UserUpdates', [
+            'dependent' => true,
+        ]);
     }
 
     public function validationDefault(Validator $validator)

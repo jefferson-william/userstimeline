@@ -55,7 +55,7 @@ define([
             '$httpProvider': $httpProvider,
         });
 
-        $sceDelegateProvider.resourceUrlWhitelist(['self', /^http[s]?:\/\/localhost\/.*/, 'http://userstimeline.s3-website-sa-east-1.amazonaws.com/**']);
+        $sceDelegateProvider.resourceUrlWhitelist(['self', /^http[s]?:\/\/localhost\/.*/, 'https://s3-sa-east-1.amazonaws.com/userstimeline/**']);
 
         (<any>$httpProvider.defaults).useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];

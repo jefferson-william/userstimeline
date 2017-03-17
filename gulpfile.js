@@ -442,7 +442,7 @@ gulp.task('minifyHtml', function() {
         .pipe(gulp.dest(paths.partials));
 });
 
-gulp.task('awscomponents', function () {
+gulp.task('awscomplete', function () {
     var publisher = awspublish.create({
         region: 'us-west-2',
         params: {
@@ -455,7 +455,8 @@ gulp.task('awscomponents', function () {
         cacheFileName: 'awspublish.json'
     });
     var files = [
-        paths.bower + '**/*.{css,js,woff,woff2,eot,ttf}',
+        '!' + paths.bower + '**/*.html',
+        paths.webroot + '**/*.{css,js,html,woff,woff2,eot,ttf}',
     ];
     return gulp.src(files)
         .pipe(gulpif('**/*.css', autoprefixer({ browsers: ['> 1%', 'last 2 versions', 'IE 8'] })))
@@ -479,8 +480,8 @@ gulp.task('awspublish', function () {
         cacheFileName: 'awspublish.json'
     });
     var files = [
-        paths.webroot + '{css,js,lib,partials}/*.{css,js,html,woff,woff2,eot,ttf}',
-        paths.webroot + '*.{css,js,html,woff,woff2,eot,ttf}',
+        paths.webroot + '**/*.{css,js,html,woff,woff2,eot,ttf}',
+        '!' + paths.bower + '**',
     ];
     return gulp.src(files)
         .pipe(gulpif('**/*.html', htmlmin({ collapseWhitespace: true })))
@@ -519,4 +520,4 @@ gulp.task('production', sequence('construct'));
 
 gulp.task('publish', sequence('construct', 'requirejsOptimize', 'sw', 'awspublish', 'awspublishFormat'));
 
-gulp.task('deploy', sequence('construct', 'requirejsOptimize', 'sw', 'awscomponents', 'awspublishFormat'));
+gulp.task('publishcomplete', sequence('construct', 'requirejsOptimize', 'sw', 'awscomplete', 'awspublishFormat'));
