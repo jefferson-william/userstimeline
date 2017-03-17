@@ -7,10 +7,7 @@
 
 define([
     'Lazyload',
-    'Route',
-], (
-    Lazyload: ILazyload,
-    Route: any) => {
+], (Lazyload: ILazyload) => {
 
     var Util = <IUtil>{};
 

@@ -5,6 +5,7 @@
 
 const rootStatic = document.getElementById('Body').getAttribute('data-root-static') || '';
 const ec2 = document.getElementById('Body').getAttribute('data-ec2') || false;
+const url = document.getElementById('Body').getAttribute('data-url') || '';
 const gz = ec2 ? '.gz' : '';
 
 let config = {
@@ -60,9 +61,9 @@ require.config({
         momentPtBr: { deps: ['moment'] },
         MomentFilter: { deps: ['momentPtBr'] },
         Lazyload: { deps: ['angularAMD'] },
-        Route: { deps: ['Lazyload'] },
-        Util: { deps: ['Lazyload', 'Route'] },
-        App: { deps: ['Util', 'angularMessages', 'angularResource', 'angularSanitize', 'angularPortuguese', 'angularUiRouter', 'angularMaterial', 'angularTimeline'] },
+        Util: { deps: ['Lazyload'] },
+        Route: { deps: ['Lazyload', 'Util'] },
+        App: { deps: ['Route', 'angularMessages', 'angularResource', 'angularSanitize', 'angularPortuguese', 'angularUiRouter', 'angularMaterial', 'angularTimeline'] },
         LayoutController: { deps: ['HeaderController'] },
         UsersIndexController: { deps: ['UsersService', 'MomentFilter'] },
         UsersAddController: { deps: ['UsersService'] },
@@ -83,9 +84,6 @@ require.config({
 });
 
 require(['Lazyload', 'App'], (Lazyload: ILazyload) => {
-
-    Lazyload.Set({ rootStatic: rootStatic, ec2: ec2 });
-
     require(['css!angularMaterialCss'], () => require(['css!BootstrapCss'], () => require(['css!angularTimelineCss', 'css!libAngularTimelineCss'])));
 });
 

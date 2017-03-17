@@ -13,7 +13,7 @@ define(() => {
     Lazyload.local = document.getElementById('Body').getAttribute('local') ? true : false;
     Lazyload.ec2 = document.getElementById('Body').getAttribute('ec2') ? true : false;
     Lazyload.rootStatic = document.getElementById('Body').getAttribute('data-root-static') || '';
-    Lazyload.urlApi = location.origin.search('localhost') <= -1 || location.origin.search(':') <= -1 ? `${location.origin}/userstimeline` : 'http://localhost/userstimeline';
+    Lazyload.url = location.origin.search('localhost') <= -1 || location.origin.search(':') <= -1 ? `${location.origin}/userstimeline` : 'http://localhost/userstimeline';
 
     Lazyload.Set = (object: {}) => {
         let prop: string;

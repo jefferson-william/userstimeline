@@ -1,16 +1,18 @@
 /// <reference path="../bower_components/DefinitelyTyped/requirejs/require.d.ts" />
 /// <reference path="../lib/DefinitelyTyped/Lazyload.d.ts" />
+/// <reference path="../lib/DefinitelyTyped/Util.d.ts" />
 /// <reference path="../lib/DefinitelyTyped/App.d.ts" />
 /// <reference path="../lib/DefinitelyTyped/Users.d.ts" />
 
 define([
-    'Lazyload'
-], (Lazyload: ILazyload) => {
+    'Lazyload',
+    'Util',
+], (Lazyload: ILazyload, Util: IUtil) => {
     let Route, originalPath, route;
 
     Route = {
         'LayoutApp': {
-            url: Lazyload.rootStatic ? `${Lazyload.rootStatic}/app/` : '/app/',
+            url: Util.AcessandoPaginaComGulp() ? `/app/` :  `/userstimeline/app/`,
             dependencies: ['LayoutController'],
             views: {
                 '': {

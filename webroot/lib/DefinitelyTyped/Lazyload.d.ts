@@ -16,4 +16,5 @@ interface ILazyload extends ILazyloader {
     urlApi: string;
     local: boolean;
     ec2: boolean;
+    url: string;
 }

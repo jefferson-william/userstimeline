@@ -61,11 +61,11 @@ define([
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
         // Redirecionar para a url inicial caso a url informada não tenha sido configurada/não exista
-        $urlRouterProvider.otherwise(Util.AcessandoPaginaComGulp() ? '/app/users' : `${Lazyload.rootStatic}/app/users`);
+        $urlRouterProvider.otherwise(Util.AcessandoPaginaComGulp() ? '/#/app/users' : `/userstimeline/app/users`);
 
         Route.SetarTodas();
 
-        $locationProvider.html5Mode(Lazyload.rootStatic ? true : false);
+        $locationProvider.html5Mode(Util.AcessandoPaginaComGulp() ? false : true);
 
         $mdThemingProvider.theme('default').primaryPalette('teal').accentPalette('deep-purple');
     };

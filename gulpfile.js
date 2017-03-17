@@ -386,12 +386,14 @@ gulp.task('requirejsOptimize', function () {
         angularPortuguese: 'bower_components/angular-i18n/angular-locale_pt-br',
         angularUiRouter: 'bower_components/angular-ui-router/release/angular-ui-router',
         angularAMD: 'bower_components/angularAMD/dist/angularAMD',
+        angularTimeline: 'bower_components/angular-timeline/dist/angular-timeline',
+        angularTimelineCss: 'bower_components/angular-timeline/dist/angular-timeline',
+        libAngularTimelineCss: 'lib/angular-timeline/angular-timeline',
         BootstrapCss: 'css/Bootstrap',
         Bootstrap: 'Bootstrap',
         Lazyload: 'js/Lazyload',
         Util: 'js/Util',
         Route: 'js/Route',
-        AppCss: 'css/App',
         App: 'js/App',
         LayoutController: 'js/Controller/Layout',
         HeaderController: 'js/Controller/Header',
@@ -411,15 +413,16 @@ gulp.task('requirejsOptimize', function () {
         angularUiRouter: { deps: ['angularAMD'] },
         angularAMD: { deps: ['angular'] },
         angularMaterial: { deps: ['angularAnimate', 'angularAria'] },
+        angularTimeline: { deps: ['angularAMD'] },
         momentPtBr: { deps: ['moment'] },
         MomentFilter: { deps: ['momentPtBr'] },
         Lazyload: { deps: ['angularAMD'] },
-        Route: { deps: ['Lazyload'] },
-        Util: { deps: ['Lazyload', 'Route'] },
-        App: { deps: ['Util', 'angularMessages', 'angularResource', 'angularSanitize', 'angularPortuguese', 'angularUiRouter', 'angularMaterial'] },
+        Util: { deps: ['Lazyload'] },
+        Route: { deps: ['Lazyload', 'Util'] },
+        App: { deps: ['Route', 'angularMessages', 'angularResource', 'angularSanitize', 'angularPortuguese', 'angularUiRouter', 'angularMaterial', 'angularTimeline'] },
         LayoutController: { deps: ['HeaderController'] },
         UsersIndexController: { deps: ['UsersService', 'MomentFilter'] },
-        UsersAddController: { deps: ['UsersService', 'ProfilesFactory', 'StateService'] },
+        UsersAddController: { deps: ['UsersService'] },
     };
     return gulp.src('webroot/Bootstrap.js')
         .pipe(requirejsOptimize(function () {
@@ -439,7 +442,7 @@ gulp.task('minifyHtml', function() {
         .pipe(gulp.dest(paths.partials));
 });
 
-gulp.task('awspublishcomplete', function () {
+gulp.task('awscomponents', function () {
     var publisher = awspublish.create({
         region: 'us-west-2',
         params: {
@@ -452,10 +455,11 @@ gulp.task('awspublishcomplete', function () {
         cacheFileName: 'awspublish.json'
     });
     var files = [
-        '!' + paths.bower + '**/*.html',
-        paths.webroot + '**/*.{css,js,html,woff,woff2,eot,ttf}',
+        paths.bower + '**/*.{css,js,woff,woff2,eot,ttf}',
     ];
     return gulp.src(files)
+        .pipe(gulpif('**/*.css', autoprefixer({ browsers: ['> 1%', 'last 2 versions', 'IE 8'] })))
+        .pipe(gulpif('**/*.css', cssnano()))
         .pipe(gulpif('!**/*.{html,woff,woff2,eot,ttf}', awspublish.gzip({ ext: '.gz' })))
         .pipe(publisher.publish({ 'Cache-Control': 'max-age=315360000, no-transform, public' }))
         .pipe(publisher.cache())
@@ -515,4 +519,4 @@ gulp.task('production', sequence('construct'));
 
 gulp.task('publish', sequence('construct', 'requirejsOptimize', 'sw', 'awspublish', 'awspublishFormat'));
 
-gulp.task('deploy', sequence('construct', 'requirejsOptimize', 'sw', 'awspublishcomplete', 'awspublishFormat'));
+gulp.task('deploy', sequence('construct', 'requirejsOptimize', 'sw', 'awscomponents', 'awspublishFormat'));
