@@ -1,6 +1,7 @@
 *.lock
 *.phar
 *.sublime-*
+documentacao.md
 vendor/*
 vendor/autoload.php
 !vendor/cakephp-plugins.php
