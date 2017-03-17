@@ -15,7 +15,7 @@
                 <div class="md-dialog-content">
                     <div layout="row">
                         <md-input-container>
-                            <input name="name" placeholder="Nome" type="text" required ng-model="UsersAdd.User.name" ng-minlength="1" ng-maxlength="255">
+                            <input name="name" placeholder="Nome" type="text" required ng-model="UsersAdd.User.name" ng-minlength="1" ng-maxlength="255" md-autofocus>
                             <div ng-messages="UsersForm.name.$error" ng-show="UsersForm.name.$touched || UsersForm.name.$dirty" role="alert">
                                 <div ng-message="required">Informe este campo</div>
                                 <div ng-message="minlength">Preencha este campo</div>
